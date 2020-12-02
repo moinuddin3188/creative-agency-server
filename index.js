@@ -110,8 +110,17 @@ client.connect(err => {
         })
     })
 
-    app.patch('/update/:id', (req, res) => {
-        console.log(req.body.color)
+    app.patch('/updateStatus/:id', (req, res) => {
+        const status = req.body.status;
+        const bg = req.body.bg;
+        const color = req.body.color;
+
+        ordersCollection.updateOne({_id: objectID(req.params.id)}, {
+            $set: {status: status, bg: bg, color: color}
+        })
+        .then(result => {
+            
+        })
     })
 
     app.post('/addAdmin', (req, res) => {
